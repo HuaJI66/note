@@ -1,2 +1,2 @@
 # note
-笔记
+这是存放markdown笔记的仓库
