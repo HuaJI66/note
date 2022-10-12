@@ -1,5 +1,41 @@
 # SpringBoot笔记
 
+## 配置SLL证书
+
+1. 申请证书并下载
+
+   ![image-20221012095110277](imgs/image-20221012095110277.png)
+
+2. 将.pfx文件复制到resources下
+
+   ![image-20221012095126881](imgs/image-20221012095126881.png)
+
+3. 配置application.yml
+
+```yaml
+spring:
+  application:
+    name: pika
+server:
+  port: 443
+  ssl:
+    key-store: classpath:8604835_host.pikachuvirtual.top.pfx
+    key-store-password: Qni83X9e
+    key-store-type: PKCS12
+    ciphers: TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256
+
+```
+
+https 访问有锁:
+
+![image-20221012095220026](imgs/image-20221012095220026.png)
+
+http 访问显示不安全:
+
+![image-20221012095250171](imgs/image-20221012095250171.png)
+
+
+
 ## 问题
 
 ###  'java.lang.String' that could not be found.
