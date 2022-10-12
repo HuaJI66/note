@@ -1009,19 +1009,13 @@ server {
 
 ![image-20221010224704754](imgs/image-20221010224704754.png)
 
+重定向到 https
 
-
-```html
-server {
-    listen 80;
-    server_name start.igrow.cn;
-    index index.html index.php;
-    root html;
-    if ($http_host !~ "^star\.igrow\.cn$" {
-        rewrite ^(.*) http://star.igrow.cn$1 redirect;
-    }
-}
+```json
+return 301 https//$server_name$request_uri;
 ```
+
+
 
  
 
@@ -1361,4 +1355,59 @@ nginx02会代理返回 http://192.168.10.111:80/admin/js/calendar/moment-2.2.1.j
 
 
 
+
+###### 12、安装CA证书
+
+**不安全的http协议**
+
+![image-20221012090907513](imgs/image-20221012090907513.png)
+
+
+
+去申请证书,上传到服务器
+
+![image-20221012091226975](imgs/image-20221012091226975.png)
+
+编辑 nginx.conf
+
+```json
+  server {
+	listen 443 ssl;
+	server_name localhost;
+	#证书路径
+	ssl_certificate /www/ca/nginx/jna8604835_host.pikachuvirtual.top.pem;
+	#证书密钥路径
+	ssl_certificate_key /www/ca/nginx/jna8604835_host.pikachuvirtual.top.key;
+  }
+```
+
+reload前访问 http://host.pikachuvirtual.top
+
+![image-20221012092634073](imgs/image-20221012092634073.png)
+
+reload后访问 https://host.pikachuvirtual.top
+
+![image-20221012092717985](imgs/image-20221012092717985.png)
+
+###### 13、安装部署Discuz
+
+1. 下载Discuz https://gitee.com/Discuz/DiscuzX/releases
+
+2. 上传到服务器并解压
+
+   ![image-20221012153424345](imgs/image-20221012153424345.png)
+
+   仅作测试,为了方便修改777权限
+
+   ```shell
+    chmod -R 777 ./
+   ```
+
+   
+
+3. 访问安装界面,开始安装
+
+4. 效果
+
+![image-20221012154244269](imgs/image-20221012154244269.png)
 
