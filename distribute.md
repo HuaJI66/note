@@ -6,7 +6,9 @@ CAP原则又称CAP定理，指的是在一个[分布式](https://so.csdn.net/so/
 
 CAP原则的精髓就是要么AP，要么CP，要么AC，但是不存在CAP。
 
-![img](imgs/20190711232042176.jpg)                ![img](imgs/20201207140745593.png)
+![img](imgs/20190711232042176.jpg)
+
+​                ![img](imgs/20201207140745593.png)
 
 > *It states, that though its desirable to have Consistency, High-Availability and Partition-tolerance in every system, unfortunately no system can achieve all three at the same time.*
 > **在分布式系统的设计中，没有一种设计可以同时满足一致性，可用性，分区容错性 3个特性** 
@@ -139,21 +141,21 @@ BASE是Basically Available（基本可用）、Soft state（软状态）和Event
 6. 将student结果序列化后通过网络返回给Client
 ```
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-ca0ba3118f4ef4fb.png?imageMogr2/auto-orient/strip|imageView2/2/w/560/format/webp)
+![img](imgs/7632302-ca0ba3118f4ef4fb.png)
 
 - 在微服务的设计中，一个服务A如果访问另一个Module下的服务B，可以采用HTTP REST传输数据，并在两个服务之间进行序列化和反序列化操作，服务B把执行结果返回过来。
 
-  ![img](https:////upload-images.jianshu.io/upload_images/7632302-19ad38cdd9a4b3ec.png?imageMogr2/auto-orient/strip|imageView2/2/w/723/format/webp)
+  ![img](imgs/7632302-19ad38cdd9a4b3ec.png)
 
 - 由于HTTP在应用层中完成，整个通信的代价较高，远程过程调用中直接基于TCP进行远程调用，数据传输在传输层TCP层完成，更适合对效率要求比较高的场景，RPC主要依赖于客户端和服务端之间建立Socket链接进行，底层实现比REST更复杂。
 
 #### 1.2 rpc demo
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-85786c3ba6daba9a.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
+![img](imgs/7632302-85786c3ba6daba9a.png)
 
 系统类图
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-ecb01c0f93876a5d.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp)
+![img](imgs/7632302-ecb01c0f93876a5d.png)
 
 系统调用过程
 
@@ -371,7 +373,7 @@ public class RPCTest {
 
 - 注册中心：当项目中有很多服务时，可以把所有的服务在启动的时候注册到一个注册中心里面，用于维护服务和服务器之间的列表，当注册中心接收到客户端请求时，去找到该服务是否远程可以调用，如果可以调用需要提供服务地址返回给客户端，客户端根据返回的地址和端口，去调用远程服务端的方法，执行完成之后将结果返回给客户端。这样在服务端加新功能的时候，客户端不需要直接感知服务端的方法，服务端将更新之后的结果在注册中心注册即可，而且当修改了服务端某些方法的时候，或者服务降级服务多机部署想实现负载均衡的时候，我们只需要更新注册中心的服务群即可。
 
-  ![img](https:////upload-images.jianshu.io/upload_images/7632302-0b09dd85b8baa318.png?imageMogr2/auto-orient/strip|imageView2/2/w/790/format/webp)
+  ![img](imgs/7632302-0b09dd85b8baa318.png)
 
   RPC调用过程
 
@@ -382,13 +384,13 @@ public class RPCTest {
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-1b5c5463c97005db.png?imageMogr2/auto-orient/strip|imageView2/2/w/417/format/webp)
+![img](imgs/7632302-1b5c5463c97005db.png)
 
 项目结构
 
 ##### 2.2.2 grpc
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-d9202738c49197c0.png?imageMogr2/auto-orient/strip|imageView2/2/w/364/format/webp)
+![img](imgs/7632302-d9202738c49197c0.png)
 
 
 
@@ -475,17 +477,17 @@ mvn complie
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-3449e9d116fa1989.png?imageMogr2/auto-orient/strip|imageView2/2/w/366/format/webp)
+![img](imgs/7632302-3449e9d116fa1989.png)
 
 生成代码：
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-733af0e5deabb037.png?imageMogr2/auto-orient/strip|imageView2/2/w/480/format/webp)
+![img](imgs/7632302-733af0e5deabb037.png)
 
 ##### 2.2.3 client
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-89faef93bd6386e9.png?imageMogr2/auto-orient/strip|imageView2/2/w/450/format/webp)
+![img](imgs/7632302-89faef93bd6386e9.png)
 
 
 
@@ -493,7 +495,7 @@ mvn complie
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-fd5057f8ab83e88a.png?imageMogr2/auto-orient/strip|imageView2/2/w/769/format/webp)
+![img](imgs/7632302-fd5057f8ab83e88a.png)
 
 
 
@@ -534,7 +536,7 @@ public class GRPCClient {
 
 ##### 2.2.4 server
 
-![img](https:////upload-images.jianshu.io/upload_images/7632302-9f60e557c0fbcdb9.png?imageMogr2/auto-orient/strip|imageView2/2/w/285/format/webp)
+![img](imgs/7632302-9f60e557c0fbcdb9.png)
 
 
 
