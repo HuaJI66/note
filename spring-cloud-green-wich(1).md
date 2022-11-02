@@ -751,7 +751,7 @@ spring:
 
 **pom.xml。** 
 
-```
+```xml
    <parent>
        <groupId>org.springframework.boot</groupId>
        <artifactId>spring-boot-starter-parent</artifactId>
@@ -799,7 +799,7 @@ spring:
 
 现在，您可以创建一个标准的Spring Boot应用程序，例如以下HTTP服务器：
 
-```
+```java
 @SpringBootApplication
 @RestController
 public class Application {
@@ -1922,7 +1922,7 @@ server {
 
 Config Server最好作为独立应用程序运行。但是，如果需要，可以将其嵌入另一个应用程序。为此，请使用`@EnableConfigServer`批注。在这种情况下，名为`spring.cloud.config.server.bootstrap`的可选属性会很有用。它是一个标志，用于指示服务器是否应从其自己的远程存储库中进行配置。默认情况下，该标志为关闭状态，因为它会延迟启动。但是，当嵌入到另一个应用程序中时，以与其他任何应用程序相同的方式进行初始化是有意义的。将`spring.cloud.config.server.bootstrap`设置为`true`时，还必须使用[复合环境存储库配置](https://www.springcloud.cc/spring-cloud-greenwich.html#composite-environment-repositories)。例如
 
-```
+```yaml
 spring:
   application:
     name: configserver
@@ -1936,6 +1936,8 @@ spring:
             search-locations: ${HOME}/Desktop/config
         bootstrap: true
 ```
+
+
 
 | ![[注意]](imgs/note.png)                                     |
 | ------------------------------------------------------------ |
@@ -1981,7 +1983,7 @@ Spring Boot应用程序可以立即利用Spring Config Server（或应用程序�
 
 **bootstrap.yml。** 
 
-```
+```yaml
 eureka:
   instance:
     ...
@@ -2038,7 +2040,7 @@ Config Service提供来自`/{application}/{profile}/{label}`的属性源，其�
 
 **bootstrap.yml。** 
 
-```
+```yaml
 spring:
   cloud:
     config:
@@ -2051,7 +2053,7 @@ spring:
 
 **bootstrap.yml。** 
 
-```
+```yaml
 spring:
   cloud:
     config:
@@ -2068,7 +2070,7 @@ spring:
 
 **bootstrap.yml。** 
 
-```
+```yaml
 spring:
   cloud:
     config:
@@ -2091,7 +2093,7 @@ Config Client提供Spring Boot运行状况指示器，该指示器尝试从Confi
 
 **CustomConfigServiceBootstrapConfiguration.java。** 
 
-```
+```java
 @Configuration
 public class CustomConfigServiceBootstrapConfiguration {
     @Bean
@@ -4648,9 +4650,9 @@ Spring的数据集成之旅始于[Spring Integration](https://projects.spring.io
 
 要开始使用，请访问[Spring Initializr](https://start.spring.io/)。从那里，您可以生成我们的`LoggingConsumer`应用程序。为此：
 
-1. 在“ **依赖关系”**部分，开始输入`stream`。当“ 云流 ”选项出现时，选择它。
+1. 在“ **依赖关系”**部分，开始输入`stream`。当“ cloud stream ”选项出现时，选择它。
 
-2. 开始输入“ kafka”或“兔子”。
+2. 开始输入“ kafka”或“rabbit”。
 
 3. 选择“ Kafka ”或“ RabbitMQ ”。
 
@@ -4684,7 +4686,7 @@ Spring的数据集成之旅始于[Spring Integration](https://projects.spring.io
 
 修改`com.example.loggingconsumer.LoggingConsumerApplication`类，如下所示：
 
-```
+```java
 @SpringBootApplication
 @EnableBinding(Sink.class)
 public class LoggingConsumerApplication {
@@ -4722,7 +4724,7 @@ public class LoggingConsumerApplication {
 
 您应该看到以下输出：
 
-```
+```java
 	--- [ main] c.s.b.r.p.RabbitExchangeQueueProvisioner : declaring queue for inbound: input.anonymous.CbMIwdkJSBO1ZoPDOtHtCg, bound to: input
 	--- [ main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
 	--- [ main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#2a3a299:0/SimpleConnection@66c83fc8. . .
@@ -4778,7 +4780,7 @@ Spring Cloud Stream引入了许多新功能，增强功能和更改。以下各�
 
 以下清单显示了如何添加常规的web框架：
 
-```
+```xml
 <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
@@ -4787,7 +4789,7 @@ Spring Cloud Stream引入了许多新功能，增强功能和更改。以下各�
 
 以下清单显示了如何添加反应式web框架：
 
-```
+```xml
 <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-webflux</artifactId>
@@ -4796,7 +4798,7 @@ Spring Cloud Stream引入了许多新功能，增强功能和更改。以下各�
 
 下表显示了如何添加执行器依赖性：
 
-```
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-actuator</artifactId>
@@ -4830,7 +4832,7 @@ Verion 2.0的核心主题之一是围绕内容类型协商和消息转换的改�
 - `SharedChannelRegistry`.使用`SharedBindingTargetRegistry`。
 - `Bindings`.符合条件的Beans已通过其类型唯一标识，例如，提供了`Source`，`Processor`或自定义绑定：
 
-```
+```java
 public interface Sample {
 	String OUTPUT = "sampleOutput";
 
@@ -4852,7 +4854,7 @@ Spring Cloud Stream是用于构建消息驱动的微服务应用程序的框架�
 
 您可以在应用程序中添加`@EnableBinding`批注，以立即连接到消息代理，还可以在方法中添加`@StreamListener`，以使其接收流处理的事件。以下示例显示了接收外部消息的接收器应用程序：
 
-```
+```java
 @SpringBootApplication
 @EnableBinding(Sink.class)
 public class VoteRecordingSinkApplication {
@@ -4872,7 +4874,7 @@ public class VoteRecordingSinkApplication {
 
 以下清单显示了`Sink`接口的定义：
 
-```
+```java
 public interface Sink {
   String INPUT = "input";
 
@@ -4885,7 +4887,7 @@ public interface Sink {
 
 Spring Cloud Stream为您创建接口的实现。您可以通过自动装配在应用程序中使用它，如以下示例所示（来自测试用例）：
 
-```
+```java
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = VoteRecordingSinkApplication.class)
 @WebAppConfiguration
@@ -4933,7 +4935,7 @@ Spring Cloud Stream应用程序由与中间件无关的内核组成。该应用�
 
 Spring Cloud Stream为[Kafka](https://github.com/spring-cloud/spring-cloud-stream-binder-kafka)和[Rabbit MQ](https://github.com/spring-cloud/spring-cloud-stream-binder-rabbit)提供了Binder实现。Spring Cloud Stream还包括一个[TestSupportBinder](https://github.com/spring-cloud/spring-cloud-stream/blob/master/spring-cloud-stream-test-support/src/main/java/org/springframework/cloud/stream/test/binder/TestSupportBinder.java)，它使通道保持[不变](https://github.com/spring-cloud/spring-cloud-stream/blob/master/spring-cloud-stream-test-support/src/main/java/org/springframework/cloud/stream/test/binder/TestSupportBinder.java)，因此测试可以与通道直接交互并可靠地断言所接收的内容。您也可以使用可扩展的API编写自己的Binder。
 
-Spring Cloud Stream使用Spring Boot进行配置，而Binder抽象使Spring Cloud Stream应用程序可以灵活地连接中间件。例如，部署者可以在运行时动态选择通道连接到的目的地（例如Kafka主题或RabbitMQ交换）。可以通过外部配置属性以及Spring Boot支持的任何形式（包括应用程序参数，环境变量以及`application.yml`或`application.properties`文件）提供这种配置。在[第27章“ *介绍Spring Cloud Stream”*](https://www.springcloud.cc/spring-cloud-greenwich.html#spring-cloud-stream-overview-introducing)的接收器示例中，将`spring.cloud.stream.bindings.input.destination`应用程序属性设置为`raw-sensor-data`会使其从`raw-sensor-data` Kafka主题或绑定到该队列的队列中读取`raw-sensor-data` RabbitMQ交换。
+Spring Cloud Stream使用Spring Boot进行配置，而Binder抽象使Spring Cloud Stream应用程序可以灵活地连接中间件。例如，部署者可以在运行时动态选择通道连接到的目的地（例如Kafka topic 或RabbitMQ exchange）。可以通过外部配置属性以及Spring Boot支持的任何形式（包括应用程序参数，环境变量以及`application.yml`或`application.properties`文件）提供这种配置。在[第27章“ *介绍Spring Cloud Stream”*](https://www.springcloud.cc/spring-cloud-greenwich.html#spring-cloud-stream-overview-introducing)的接收器示例中，将`spring.cloud.stream.bindings.input.destination`应用程序属性设置为`raw-sensor-data`会使其从`raw-sensor-data` Kafka主题或绑定到该队列的队列中读取`raw-sensor-data` RabbitMQ交换。
 
 Spring Cloud Stream自动检测并使用在类路径上找到的活页夹。您可以使用具有相同代码的不同类型的中间件。为此，在构建时包括一个不同的活页夹。对于更复杂的用例，您还可以在应用程序中打包多个活页夹，并在运行时选择活页夹（甚至为不同的通道使用不同的活页夹）。
 
@@ -5038,7 +5040,7 @@ Binders承担了许多样板工作，否则这些工作就落在了您的肩上�
 
 下面的示例显示了一个功能完整且运行正常的Spring Cloud Stream应用程序，该应用程序从`INPUT`目标接收的消息净荷为`String`类型（请参见[第32章，*内容类型协商*](https://www.springcloud.cc/spring-cloud-greenwich.html#content-type-management)部分），并将其记录到控制台，并将其转换为大写字母后将其发送到`OUTPUT`目标。
 
-```
+```java
 @SpringBootApplication
 @EnableBinding(Processor.class)
 public class MyApplication {
@@ -5064,7 +5066,7 @@ Spring Cloud Stream已经为典型的消息交换合同提供了*绑定*接口�
 - **源：**通过提供将生成的消息发送到的目的地，来标识消息生产者的合同。
 - **处理器：**通过公开两个允许使用和产生消息的目的地，封装了接收器和源协定。
 
-```
+```java
 public interface Sink {
 
   String INPUT = "input";
@@ -9155,7 +9157,7 @@ Spring Cloud Bus用轻量级消息代理链接分布式系统的节点。然后�
 
 **application.yml。** 
 
-```
+```yaml
 spring:
   rabbitmq:
     host: mybroker.com

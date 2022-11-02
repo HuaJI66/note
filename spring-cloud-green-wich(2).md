@@ -12155,7 +12155,7 @@ spring.cloud.vault:
 
 另请参阅：[Vault文档：租赁，续订和吊销](https://www.vaultproject.io/docs/concepts/lease.html)
 
-# 第十五部分。Spring Cloud网关
+# 第十五部分。Spring Cloud Gateway
 
 **Greenwich SR5**
 
@@ -12203,7 +12203,7 @@ spring.cloud.vault:
 
 **application.yml。** 
 
-```
+```yaml
 spring:
   cloud:
     gateway:
@@ -13077,7 +13077,7 @@ spring:
 
 **application.yml。** 
 
-```
+```yml
 spring:
   cloud:
     gateway:
@@ -13544,7 +13544,7 @@ spring:
 
 **ExampleConfiguration.java。** 
 
-```
+```java
 @Bean
 public GlobalFilter customFilter() {
     return new CustomGlobalFilter();
@@ -13577,7 +13577,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
 **application.yml。** 
 
-```
+```yml
 spring:
   cloud:
     gateway:
